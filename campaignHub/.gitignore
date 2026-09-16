@@ -1,0 +1,52 @@
+  .env
+  .env.*
+  !.env.example
+
+  # Python environments
+  .venv/
+  venv/
+  env/
+
+  # Python-generated files
+  __pycache__/
+  *.py[cod]
+  *$py.class
+
+  # Test and coverage output
+  .pytest_cache/
+  .coverage
+  .coverage.*
+  htmlcov/
+  coverage.xml
+
+  # Development-tool caches
+  .mypy_cache/
+  .ruff_cache/
+  .pyright/
+
+  # Packaging output
+  build/
+  dist/
+  *.egg-info/
+
+  # Logs and runtime files
+  *.log
+  logs/
+  *.pid
+
+  # Local application data
+  .local/
+  data/
+  uploads/
+  exports/
+
+  # Editor settings
+  .vscode/
+  .idea/
+
+  # Operating-system files
+  .DS_Store
+  Thumbs.db
+
+  # Local container overrides
+  compose.override.yaml
