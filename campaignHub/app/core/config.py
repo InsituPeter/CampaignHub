@@ -4,13 +4,11 @@ from typing import Literal, Self
 from pydantic import Field, SecretStr, field_validator, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-
 Environment = Literal["development", "test", "production"]
 LogLevel = Literal["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"]
 
 DEFAULT_DATABASE_URL = (
-    "postgresql+asyncpg://"
-    "campaignhub:campaignhub_local@localhost:5432/campaignhub"
+    "postgresql+asyncpg://campaignhub:campaignhub_local@localhost:5435/campaignhub"
 )
 
 
@@ -68,21 +66,6 @@ class Settings(BaseSettings):
             raise ValueError("API prefix must not end with '/'")
 
         return value
-
-    @field_validator("database_url", mode="before")
-    @classmethod
-    def validate_database_url(cls, value: object) -> object:
-        if isinstance(value, SecretStr):
-            database_url = value.get_secret_value()
-        elif isinstance(value, str):
-            database_url = value.strip()
-        else:
-            return value
-
-        if not database_url.startswith("postgresql+asyncpg://"):
-            raise ValueError("Database URL must use the postgresql+asyncpg driver")
-
-        return database_url
 
     @model_validator(mode="after")
     def validate_production_settings(self) -> Self:

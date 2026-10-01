@@ -8,7 +8,7 @@
       "asyncpg>=0.31.0",
       "fastapi>=0.115,<1",
       "pydantic-settings>=2.15.0",
-      "sqlalchemy[asyncio]>=2.0.54",
+      "sqlalchemy[asyncio]>=2.1.1",
       "uvicorn[standard]>=0.30,<1",
 ]
 
@@ -54,6 +54,7 @@
   line-ending = "auto"
 
   [tool.mypy]
+  plugins = ["pydantic.mypy"]
   python_version = "3.13"
   strict = true
   warn_unreachable = true

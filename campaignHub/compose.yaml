@@ -1,0 +1,30 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: campaignhub-postgres
+    restart: unless-stopped
+
+    environment:
+      POSTGRES_DB: campaignhub
+      POSTGRES_USER: campaignhub
+      POSTGRES_PASSWORD: campaignhub_local
+
+    ports:
+      - "127.0.0.1:5435:5432"
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - pg_isready -U campaignhub -d campaignhub
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+
+    stop_grace_period: 30s
+
+volumes:
+  postgres_data:
